@@ -1,0 +1,30 @@
+{
+  "name": "week-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --coverage --runInBand",
+    "tdd": "jest --watch --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UW-PCE-JSCRIPT-400-Summer-2020/Week-3.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UW-PCE-JSCRIPT-400-Summer-2020/Week-3/issues"
+  },
+  "homepage": "https://github.com/UW-PCE-JSCRIPT-400-Summer-2020/Week-3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.21"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^1.1.5",
+    "jest": "^26.1.0",
+    "supertest": "^4.0.2"
+  }
+}
