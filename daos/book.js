@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const Book = require("../models/book");
+const Author = require("../models/author");
 
 module.exports = {};
 
@@ -72,12 +73,44 @@ module.exports.getAuthorStats = async () => {
     {
       $project: {
         _id: 0,
-        authorId: "$_id",
+        authorId: { $toObjectId: "$_id" },
         averagePageCount: 1,
         numBooks: 1,
         titles: { $reverseArray: "$titles" },
       },
-    }
+    },
+  ]);
+  return authorStats;
+};
+
+module.exports.authorInfo = async () => {
+  const authorStats = await Book.aggregate([
+    {
+      $group: {
+        _id: "$authorId",
+        averagePageCount: { $avg: "$pageCount" },
+        numBooks: { $sum: 1 },
+        titles: { $addToSet: "$title" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        authorId: { $toObjectId: "$_id" },
+        averagePageCount: 1,
+        numBooks: 1,
+        titles: { $reverseArray: "$titles" },
+      },
+    },
+    {
+      $lookup: {
+        from: "authors",
+        localField: "authorId",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    { $unwind: "$author" },
   ]);
   return authorStats;
 };

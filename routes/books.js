@@ -33,7 +33,11 @@ router.get("/search", async (req, res, next) => {
 
 // get("/books/authors/stats");
 router.get("/authors/stats", async (req, res, next) => {
+  if (req.query.authorInfo && req.query.authorInfo === "true") {
+    res.json(await bookDAO.authorInfo());
+  } else {
     res.json(await bookDAO.getAuthorStats());
+  }
 });
 
 // Read - single book
