@@ -1,4 +1,4 @@
-  
+
 const request = require("supertest");
 
 const server = require("../server");
@@ -329,7 +329,7 @@ describe("/books", () => {
       book.blurb = "New Blurb";
       const res = await request(server).put("/books/" + book._id).send(book);
       expect(res.statusCode).toEqual(200);
-     
+
       const savedBook = await Books.findOne({ _id: book._id }).lean();
       savedBook._id = savedBook._id.toString();
       expect(savedBook).toMatchObject(book);
@@ -341,7 +341,7 @@ describe("/books", () => {
       const res = await request(server).delete("/books/fake").send();
       expect(res.statusCode).toEqual(400);
     });
-    
+
     it("should delete the expected book", async () => {
       const { _id } = testBooks[1];
       const res = await request(server).delete("/books/" + _id).send({});
