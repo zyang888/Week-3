@@ -53,7 +53,7 @@ module.exports.create = async (bookData) => {
     const created = await Book.create(bookData);
     return created;
   } catch (e) {
-    if (e.message.includes("validation failed")) {
+    if (e.message.includes("validation failed") || e.message.includes("duplicate key")) {
       throw new BadDataError(e.message);
     }
     throw e;

@@ -297,7 +297,6 @@ describe("/books", () => {
       const savedISBNBooks = await Books.find({ ISBN: book.ISBN });
       expect(savedISBNBooks).toHaveLength(1);
       expect(res.statusCode).toEqual(400);
-
     });
 
     it("should create a book", async () => {
